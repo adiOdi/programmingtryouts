@@ -13,10 +13,10 @@ bin:	## compiles project to executable binary
 
 encrypt: bin						## runs the project with default configs
 	@printf "[\e[0;36mINFO\e[0m] encrypting...\n"
-	./crypto -e keyksekmentucrvzenormisbov messagerunstheprojectwithdefaultconfigs
+	./crypto -e ZZZZZZZZZZZZZZZZZZZZZZZZZZ message1 AaZz09 runs the Project with default Z configs
 	
 decrypt: bin						## runs the project with default configs
 	@printf "[\e[0;36mINFO\e[0m] decrypting...\n"
-	./crypto -d keyksekmentucrvzenormisbov
+	./crypto -d ZZZZZZZZZZZZZZZZZZZZZZZZZZ
 
 -include $(wildcard *.d)
