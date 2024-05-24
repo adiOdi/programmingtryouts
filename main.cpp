@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
             if (argc != 4)
                 throw std::invalid_argument("usage: mode[-d/-e] key message");
             key = argv[2];
+            if (key.size() <= 26)
+                throw std::invalid_argument("key must be longer than 26 characters");
             text = argv[3];
             std::cout << encrypt(key, text) << std::endl;
         }
@@ -36,6 +38,8 @@ int main(int argc, char *argv[])
             if (argc != 4 && argc != 3)
                 throw std::invalid_argument("usage: mode[-d/-e] key message");
             key = argv[2];
+            if (key.size() <= 26)
+                throw std::invalid_argument("key must be longer than 26 characters");
             if (argc == 4)
                 text = argv[3];
             else
