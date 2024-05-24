@@ -1,3 +1,6 @@
+// this is a implementation of an https://en.m.wikipedia.org/wiki/Autokey_cipher
+// I implemented a nonlinear key advance mechanism to hopefully combat the weaknesses described
+
 #include <string>
 #include <iostream>
 #include <fstream>
