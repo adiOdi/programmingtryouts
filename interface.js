@@ -1,13 +1,20 @@
 let formulaField = document.getElementById("formula");
 function newFormula(event) {
   if (event.keyCode != 13) return;
-  formulas.set(formulas.size + "", event.target.value);
+  let newKey = 0;
+  while (formulas.has(newKey + "")) {
+    newKey++;
+  }
+  formulas.set(newKey + "", event.target.value);
   event.target.value = "";
   updateFormDiv();
 }
 function updateForm(event) {
   if (event.keyCode != 13) return;
-  formulas.set(event.target.name, event.target.value);
+  const newForm = event.target.value;
+  const key = event.target.name;
+  if (newForm == "") formulas.delete(key);
+  else formulas.set(key, newForm);
   updateFormDiv();
 }
 let varField = document.getElementById("var");
@@ -21,7 +28,11 @@ function newVar(event) {
 }
 function changeVar(event) {
   if (event.keyCode != 13) return;
-  variables.set(event.target.name, event.target.value);
+  const newVar = event.target.value;
+  const key = event.target.name;
+  if (newVar == "") variables.delete(key);
+  else variables.set(key, newVar);
+  updateVarDiv();
   updateFormDiv();
 }
 function increaseVar(event) {
@@ -85,21 +96,19 @@ function updateFormDiv() {
     JSON.stringify(Array.from(variables.entries()))
   );
   formDiv.innerHTML = "";
-  let key = 0;
-  formulas.forEach((element) => {
+  for (let [key, value] of formulas.entries()) {
     const div = document.createElement("div");
     const input = document.createElement("input");
     input.type = "text";
     input.addEventListener("keydown", updateForm);
-    input.value = element;
+    input.value = value;
     input.name = key;
-    key++;
     div.appendChild(input);
     const res = document.createElement("p");
-    res.innerText = calculate(element);
+    res.innerText = calculate(value);
     div.appendChild(res);
     formDiv.appendChild(div);
-  });
+  }
 }
 updateVarDiv();
 updateFormDiv();
