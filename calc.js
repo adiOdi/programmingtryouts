@@ -1,11 +1,18 @@
 let variables;
+let varNames;
 let formulas;
+let formNames;
+
 if (localStorage.getItem("exists")) {
   variables = new Map(JSON.parse(localStorage.getItem("variables")));
   formulas = new Map(JSON.parse(localStorage.getItem("formulas")));
+  varNames = new Map(JSON.parse(localStorage.getItem("varNames")));
+  formNames = new Map(JSON.parse(localStorage.getItem("formNames")));
 } else {
   variables = new Map();
   formulas = new Map();
+  varNames = new Map();
+  formNames = new Map();
   localStorage.setItem("exists", true);
 }
 
