@@ -12,9 +12,9 @@ using std::string;
 string encrypt(string &key, string &message);
 string decrypt(string &key, string &ciphertext);
 void advanceKey(string &key, const string &message, size_t pos);
+int keyLength;
 int main(int argc, char *argv[])
 {
-    std::cout << std::endl;
     try
     {
         if (argc < 2)
@@ -27,8 +27,7 @@ int main(int argc, char *argv[])
             if (argc < 4)
                 throw std::invalid_argument("usage: mode[-d/-e] key message, argc <4");
             key = argv[2];
-            if (key.size() < 26)
-                throw std::invalid_argument("key must be longer than 26 characters");
+            keyLength = key.size();
             for (int i = 3; i < argc; i++)
             {
                 text += argv[i];
@@ -42,8 +41,7 @@ int main(int argc, char *argv[])
             if (argc < 3)
                 throw std::invalid_argument("usage: mode[-d/-e] key message, argc <3");
             key = argv[2];
-            if (key.size() < 26)
-                throw std::invalid_argument("key must be longer than 26 characters");
+            keyLength = key.size();
             if (argc >= 4)
                 for (int i = 3; i < argc; i++)
                 {
@@ -54,7 +52,6 @@ int main(int argc, char *argv[])
                 text = "";
             std::cout << decrypt(key, text) << std::endl;
         }
-
         return 0;
     }
     catch (const std::invalid_argument &e)
@@ -102,5 +99,5 @@ string decrypt(string &key, string &ciphertext)
 void advanceKey(string &key, const string &message, size_t pos)
 {
     char msg_now = message.at(pos);
-    key += add(msg_now, key.at(key.size() - (int)(toInt(msg_now) / 2) - 1));
+    key += add(msg_now, key.at(key.size() - mod(toInt(msg_now), keyLength) - 1));
 }
