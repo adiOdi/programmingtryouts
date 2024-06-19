@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="calc.js"></script>
+  </head>
+  <body>
+    <label for="formula">enter new formula:</label>
+    <input
+      type="text"
+      onkeydown="newFormula(event)"
+      id="formula"
+      name="formula"
+    />
+    <label for="var">enter new variable:</label>
+    <input type="text" onkeydown="newVar(event)" id="var" name="var" />
+    <div id="variables"></div>
+    <div id="formulas"></div>
+    <script src="interface.js"></script>
+  </body>
+</html>
