@@ -104,8 +104,9 @@ function updateFormDiv() {
     input.value = value;
     input.name = key;
     div.appendChild(input);
-    const res = document.createElement("p");
-    res.innerText = calculate(value);
+    const res = document.createElement("label");
+    res.innerText = " = " + calculate(value);
+    res.for = key;
     div.appendChild(res);
     formDiv.appendChild(div);
   }
